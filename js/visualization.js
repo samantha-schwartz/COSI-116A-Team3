@@ -20,6 +20,12 @@
     // side-by-side bar chart
     sideBySideBarChart()("#bar-chart", data);
 
+    // year slider 
+    yearSlider()("#year-slider");
+
+    // neighborhood slider
+    neighborhoodSlider()("#neighborhood-slider", data);
+
   });
 
 })());
