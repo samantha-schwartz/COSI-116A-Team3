@@ -235,5 +235,13 @@ function sideBySideBarChart() {
             tooltip.style("opacity", 0);
         });
 
-    return chart;
+    // this part moves the details box along with the mouse
+    svg.selectAll(".student-bar, .kids-bar")
+        .on("mousemove.tooltip", event => {
+            tooltip.style("left", (event.pageX + 12) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        });
+
+    return chart
+
 }
