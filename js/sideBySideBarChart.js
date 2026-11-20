@@ -179,6 +179,16 @@ function sideBySideBarChart() {
             .attr("x", 105).attr("y", 9).attr("font-size", 10)
             .text("Homes with kids (%)");
 
+        // we are keeping the hovered row bright and fade the others
+        svg.selectAll(".student-bar, .kids-bar")
+            .on("mouseover.highlight", (event, d) => {
+                svg.selectAll(".student-bar, .kids-bar")
+                    .attr("opacity", b => b.zip === d.zip ? 1 : 0.3);
+            })
+            .on("mouseleave.highlight", () => {
+                svg.selectAll(".student-bar, .kids-bar").attr("opacity", 1);
+            });
+
         return chart;
     }
 
