@@ -189,10 +189,41 @@ function sideBySideBarChart() {
                 svg.selectAll(".student-bar, .kids-bar").attr("opacity", 1);
             });
 
+        // the details box, its hidden until you hover a bar
+        const tooltip = d3.select("body").append("div")
+            .attr("class", "bar-tooltip")
+            .style("position", "absolute")
+            .style("pointer-events", "none")
+            .style("background", "white")
+            .style("border", "1px solid #888")
+            .style("padding", "6px 8px")
+            .style("font", "12px sans-serif")
+            .style("opacity", 0);
+
+        svg.selectAll(".student-bar, .kids-bar")
+            .on("mouseover.tooltip", (event, d) => {
+                tooltip.style("opacity", 1)
+                    .style("left", (event.pageX + 12) + "px")
+                    .style("top", (event.pageY - 28) + "px")
+                    .html(`<strong>${d.name}</strong> (${d.zip})<br>
+                     Students: ${d3.format(",")(d.students)}<br>
+                     Homes with kids: ${d.kids2024}%`);
+            })
+            .on("mouseleave.tooltip", () => {
+                tooltip.style("opacity", 0);
+            });
+
+        // this part moves the details box along with the mouse
+        svg.selectAll(".student-bar, .kids-bar")
+            .on("mousemove.tooltip", event => {
+                tooltip.style("left", (event.pageX + 12) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+            });
+
         return chart;
     }
 
-    // getter/setter functions so other code can change the size
+
     chart.width = function (value) {
         if (!arguments.length) return width;
         width = value;
@@ -211,37 +242,5 @@ function sideBySideBarChart() {
         return chart;
     };
 
-    // the details box, its hidden until you hover a bar)
-    const tooltip = d3.select("body").append("div")
-        .attr("class", "bar-tooltip")
-        .style("position", "absolute")
-        .style("pointer-events", "none")
-        .style("background", "white")
-        .style("border", "1px solid #888")
-        .style("padding", "6px 8px")
-        .style("font", "12px sans-serif")
-        .style("opacity", 0);
-
-    svg.selectAll(".student-bar, .kids-bar")
-        .on("mouseover.tooltip", (event, d) => {
-            tooltip.style("opacity", 1)
-                .style("left", (event.pageX + 12) + "px")
-                .style("top", (event.pageY - 28) + "px")
-                .html(`<strong>${d.name}</strong> (${d.zip})<br>
-                 Students: ${d3.format(",")(d.students)}<br>
-                 Homes with kids: ${d.kids2024}%`);
-        })
-        .on("mouseleave.tooltip", () => {
-            tooltip.style("opacity", 0);
-        });
-
-    // this part moves the details box along with the mouse
-    svg.selectAll(".student-bar, .kids-bar")
-        .on("mousemove.tooltip", event => {
-            tooltip.style("left", (event.pageX + 12) + "px")
-                .style("top", (event.pageY - 28) + "px");
-        });
-
-    return chart
-
+    return chart;
 }
