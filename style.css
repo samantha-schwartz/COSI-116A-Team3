@@ -77,3 +77,17 @@ h1, h2, h3 {
 		box-shadow:4px 4px 10px rgba(0,0,0,0.8);
 	}
 }
+
+svg#map {
+    width: 900px;
+	height: 700px;
+ }
+
+ #boundary path {
+  stroke-dasharray: 3 5;
+  } 
+
+  path {
+  fill: none;
+  stroke: black;
+  }
