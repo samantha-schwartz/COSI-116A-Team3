@@ -133,28 +133,28 @@ function neighborhoodSlider() {
             }
         };
 
-                // set the default category and neighborhood
-                let selectedMetric = "families";
-                let selectedIndex = 0;
+        // set the default category and neighborhood
+        let selectedMetric = "families";
+        let selectedIndex = 0;
 
-                // select the container and clear existing content
-                const controls = d3.select(controlsSelector);
-                controls.selectAll("*").remove();
+        // select the container and clear existing content
+        const controls = d3.select(controlsSelector);
+        controls.selectAll("*").remove();
 
-                // create the category dropdown menu
-                controls.append("label")
-                    .text("Choose a category: ");
+        // create the category dropdown menu
+        controls.append("label")
+            .text("Choose a category: ");
 
-                const dropdown = controls.append("select")
-                    .style("margin-left", "8px")
-                    .style("padding", "6px");
+        const dropdown = controls.append("select")
+            .style("margin-left", "8px")
+            .style("padding", "6px");
 
-                // add the category options to the dropdown
-                dropdown.selectAll("option")
-                    .data(Object.entries(metrics))
-                    .join("option")
-                    .attr("value", d => d[0])
-                    .text(d => d[1].label);
+        // add the category options to the dropdown
+        dropdown.selectAll("option")
+            .data(Object.entries(metrics))
+            .join("option")
+            .attr("value", d => d[0])
+            .text(d => d[1].label);
 
         // create a container for the neighborhood name and value
         const display = controls.append("div")
